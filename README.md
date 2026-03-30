@@ -23,6 +23,10 @@ A personal book library app built with vanilla JavaScript. Part of The Odin Proj
 - CSS (custom properties, CSS Grid, animations)
 - Vanilla JavaScript (no frameworks or libraries)
 
+## Demo
+
+https://mahmoud-badi.github.io/ReadStack/
+
 ## How to run
 
 Open `index.html` in a browser. No build step needed.
