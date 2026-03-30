@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>ReadStack</title>
+</head>
+<body>
+
+    <!-- navbar -->
+    <header class="navbar">
+        <div class="container navbar__inner">
+            <div class="navbar__brand">
+                <span class="navbar__logo">ReadStack</span>
+                <span class="navbar__tagline">your personal library</span>
+            </div>
+            <button class="btn btn--primary" id="open-dialog-btn" data-action="open-dialog">
+                <svg class="btn__icon" width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                    <path d="M6.5 1V12M1 6.5H12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                New Book
+            </button>
+        </div>
+    </header>
+
+    <!-- stats bar -->
+    <section class="stats-bar" aria-label="Reading statistics">
+        <div class="container stats-bar__inner">
+            <div class="stats-bar__counts">
+                <div class="stat">
+                    <span class="stat__value" data-stat="total">0</span>
+                    <span class="stat__label">Total</span>
+                </div>
+                <div class="stat-divider" aria-hidden="true"></div>
+                <div class="stat">
+                    <span class="stat__value stat__value--read" data-stat="read">0</span>
+                    <span class="stat__label">Read</span>
+                </div>
+                <div class="stat-divider" aria-hidden="true"></div>
+                <div class="stat">
+                    <span class="stat__value" data-stat="unread">0</span>
+                    <span class="stat__label">Unread</span>
+                </div>
+            </div>
+
+            <div class="stats-bar__progress">
+                <div class="progress-header">
+                    <span class="progress-label" data-progress-text>You've read 0 of 0 books</span>
+                    <span class="progress-pct" data-progress-pct>0%</span>
+                </div>
+                <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress">
+                    <div class="progress-fill" data-progress-fill style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- library grid -->
+    <main class="main-content">
+        <div class="container">
+            <div class="library-grid" id="library-grid" data-library-grid>
+                <!-- cards rendered by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- add book dialog -->
+    <dialog class="dialog" id="add-book-dialog" aria-labelledby="dialog-title">
+        <div class="dialog__panel">
+            <div class="dialog__header">
+                <div>
+                    <h2 class="dialog__title" id="dialog-title">Add a Book</h2>
+                    <p class="dialog__subtitle">Track your next read or one you've already finished.</p>
+                </div>
+                <button class="dialog__close-btn" id="close-dialog-btn" data-action="close-dialog" aria-label="Close dialog">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                        <path d="M2 2L12 12M12 2L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+
+            <form class="dialog__form" id="add-book-form" data-form="add-book" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="book-title">Title</label>
+                        <input class="form-input" type="text" id="book-title" name="title" placeholder="e.g. The Great Gatsby" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="book-author">Author</label>
+                        <input class="form-input" type="text" id="book-author" name="author" placeholder="e.g. F. Scott Fitzgerald" autocomplete="off" required>
+                    </div>
+                </div>
+
+                <div class="form-group form-group--half">
+                    <label class="form-label" for="book-pages">Pages</label>
+                    <input class="form-input" type="number" id="book-pages" name="pages" placeholder="e.g. 280" min="1" max="9999" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-checkbox-label">
+                        <input class="form-checkbox" type="checkbox" id="book-read" name="read">
+                        <span class="form-checkbox-custom" aria-hidden="true">
+                            <svg class="form-checkbox-check" width="9" height="7" viewBox="0 0 9 7" fill="none" aria-hidden="true">
+                                <path d="M1 3.5L3.2 6L8 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <span class="form-checkbox-text">I've already read this book</span>
+                    </label>
+                </div>
+
+                <div class="dialog__actions">
+                    <button type="button" class="btn btn--ghost" data-action="close-dialog">Cancel</button>
+                    <button type="submit" class="btn btn--primary">Add to Library</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <script src="main.js"></script>
+</body>
+</html>
