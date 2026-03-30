@@ -1,3 +1,14 @@
+// theme
+
+const themeToggle = document.getElementById('theme-toggle');
+
+themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.dataset.theme;
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem('readstack-theme', next);
+});
+
 // dialog
 
 const dialog = document.getElementById('add-book-dialog');
@@ -25,9 +36,6 @@ dialog.addEventListener('click', (e) => {
 
 // data
 
-const accents = ['sage', 'amber', 'rose', 'slate', 'teal', 'violet', 'olive', 'coral', 'sky'];
-let currentAccentIndex = 0;
-
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -39,17 +47,10 @@ function generateId() {
     return Math.random().toString(36).substring(2, 15);
 }
 
-function getNextAccent() {
-    const accent = accents[currentAccentIndex];
-    currentAccentIndex = (currentAccentIndex + 1) % accents.length;
-    return accent;
-}
-
 const myLibrary = [];
 
 function addBookToLibrary(book) {
     book.id = generateId();
-    book.accent = getNextAccent();
     myLibrary.push(book);
 }
 
@@ -60,14 +61,12 @@ function createBookCard(book) {
     card.className = 'book-card book-card-enter';
     card.dataset.id = book.id;
     card.dataset.read = book.read;
-    card.dataset.accent = book.accent;
 
     const badgeClass = book.read ? 'book-card__badge--read' : 'book-card__badge--unread';
     const badgeText  = book.read ? 'Read' : 'Unread';
     const toggleText = book.read ? 'Mark Unread' : 'Mark as Read';
 
     card.innerHTML = `
-        <div class="book-card__spine" aria-hidden="true"></div>
         <div class="book-card__body">
             <div class="book-card__content">
                 <span class="book-card__badge ${badgeClass}" data-badge>${badgeText}</span>
@@ -99,7 +98,26 @@ function createBookCard(book) {
 function renderLibrary() {
     const grid = document.querySelector('[data-library-grid]');
     grid.innerHTML = '';
-    myLibrary.forEach(book => grid.appendChild(createBookCard(book)));
+
+    if (myLibrary.length === 0) {
+        grid.innerHTML = `
+            <div class="library-empty">
+                <div class="library-empty__icon">
+                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                        <rect x="3" y="2" width="11" height="18" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M14 5h3a1.5 1.5 0 011.5 1.5v11A1.5 1.5 0 0116.5 19H14" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M7 7h5M7 10.5h5M7 14h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3 class="library-empty__title">Your library is empty</h3>
+                <p class="library-empty__text">Start building your collection by adding the first book.</p>
+                <span class="library-empty__hint">Click <em>New Book</em> to get started.</span>
+            </div>
+        `;
+    } else {
+        myLibrary.forEach(book => grid.appendChild(createBookCard(book)));
+    }
+
     updateStats();
 }
 
@@ -149,6 +167,10 @@ document.addEventListener('click', (e) => {
         handleAction(actionEl);
     }
 });
+
+// init
+
+renderLibrary();
 
 // form
 

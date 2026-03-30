@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
+    <script>
+        const t = localStorage.getItem('readstack-theme');
+        if (t) document.documentElement.dataset.theme = t;
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>ReadStack</title>
 </head>
@@ -18,12 +22,23 @@
                 <span class="navbar__logo">ReadStack</span>
                 <span class="navbar__tagline">your personal library</span>
             </div>
-            <button class="btn btn--primary" id="open-dialog-btn" data-action="open-dialog">
-                <svg class="btn__icon" width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
-                    <path d="M6.5 1V12M1 6.5H12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                New Book
-            </button>
+            <div class="navbar__actions">
+                <button class="btn-theme" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                        <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M8 1.5V3M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="btn btn--primary" id="open-dialog-btn" data-action="open-dialog">
+                    <svg class="btn__icon" width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                        <path d="M6.5 1V12M1 6.5H12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    New Book
+                </button>
+            </div>
         </div>
     </header>
 
