@@ -20,7 +20,7 @@ https://mahmoud-badi.github.io/ReadStack/
 - Object constructors and working with object properties
 - Separating data logic from display logic
 - DOM manipulation by building elements with JavaScript instead of hardcoding HTML
-- Event delegation — one listener handling clicks across dynamically created elements
+- Event delegation, one listener handling clicks across dynamically created elements
 - The render cycle pattern: update data → re-render UI
 
 ## Stack
