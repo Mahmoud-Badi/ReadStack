@@ -6,6 +6,8 @@ A personal book library app built with vanilla JavaScript. Part of The Odin Proj
 
 https://mahmoud-badi.github.io/ReadStack/
 
+![ReadStack screenshot](site-ss.png)
+
 ## Features
 
 - Add books with title, author, page count, and read status
